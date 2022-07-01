@@ -1,0 +1,7 @@
+<launch>
+    <node name="turtlesim" pkg = "turtlesim" type="turtlesim_node"/>
+    <node name="Spiral_server" pkg="wk1homework_2020141440041" type="Spiral_server.py" output="screen"/>
+    <arg name="color" default="3"/>
+    <param name="color_param" value="$(arg color)" />
+    <node name="Spiral_client" pkg="wk1homework_2020141440041" type="Spiral_client.py"  output="screen"/>
+</launch>
