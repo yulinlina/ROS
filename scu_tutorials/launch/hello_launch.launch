@@ -1,0 +1,3 @@
+<launch>
+    <node pkg="scu_tutorials" type= "hello_ros.py" name="hello_node" output="screen"></node>
+</launch>

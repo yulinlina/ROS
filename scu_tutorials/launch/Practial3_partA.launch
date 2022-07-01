@@ -1,0 +1,5 @@
+<launch>
+    <node name="listener" pkg="scu_tutorials" type="listener_custom_message.py" output="screen"/>
+
+    <node name="talker" pkg="scu_tutorials" type="talker_custom_message.py" output="screen"/>
+</launch>

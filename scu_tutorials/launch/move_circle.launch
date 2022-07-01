@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="turtlesim" type="turtlesim_node" name="turtle" output="screen"></node>
+
+    <node pkg="scu_toturials" type="move_turtle_circle.py" name="turtle_mover" output="screen"></node>
+</launch>

@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="turtlesim" type = "turtlesim_node" name="turtle" output="screen"/>
+    <node pkg = "scu_tutorials" type = "change_turtlesim_bkg.py" name="change_background" output="screen"/>
+</launch>
