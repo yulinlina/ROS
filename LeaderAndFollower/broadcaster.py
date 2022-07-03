@@ -18,11 +18,14 @@ import random
 class tfBroadcaster:
     
     def __init__(self,turtle_name):
-        
+        self.init_x=0
+        self.init_y=0
         self.spawn_leader(turtle_name)
+
+
         self.pose=Pose()
         rospy.Subscriber('%s/pose'%turtle_name,turtlesim.msg.Pose,self.handle_turtle_pose,turtle_name)
-        
+       
        
 
         #set pen color
@@ -38,7 +41,10 @@ class tfBroadcaster:
         vel_msg.linear.x = 1
       
         while not rospy.is_shutdown():
-        #     #set angular speed random from -3 to 3
+        #     #set angular speed random from -5 to 5
+            if self.pose.x>=10.5 or self.pose.y>=10.5 or self.pose.x<=0 or self.pose.y<=0:
+                break
+            
             vel_msg.angular.z = (random.random() - 0.5) * 10
             
             pub.publish(vel_msg)
@@ -63,20 +69,38 @@ class tfBroadcaster:
         pub.publish(vel_msg)
 
     def ishit_boundary(self):
-         if self.pose.x>=10 or self.pose.y>=10:
+         if self.pose.x>=10.5 or self.pose.x<=0 or self.pose.y>=10.5 or self.pose.y<=0:
             hb=HitBoundary()
             hb.isHit=True
             hb.message ="I hit the wall!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+            hb.x=self.init_x
+            hb.y=self.init_y
             pub=rospy.Publisher('hitboundary',HitBoundary,queue_size=10)
             pub.publish(hb)
-            rospy.loginfo(hb)
+         
 
     def spawn_leader(self,turtle_name):
+       
         rospy.wait_for_service('spawn')
         spawner = rospy.ServiceProxy('spawn', Spawn)
-        x = random.randint(0,10)
-        y = random.randint(0,10)
+        x = random.randint(2,8)
+        y = random.randint(2,8)
         spawner(x, y, 0, turtle_name)
+        self.init_x=x
+        self.init_y=y
+        print("*******************************************************************************")
+        print("*******************************************************************************")
+        mode =int(input("************choose the mode of the leader return position *****************\n 1 return to the center \n 2 return to the inital position \n 3 custom define\n"))
+        if mode==1:
+            self.init_x=5
+            self.init_y=5
+        if mode==3:
+            self.init_x = int(input("Please enter the x:"))
+            self.init_y = int(input("Please enter the y:"))
+        print("********************************************************************************")
+        print("********************************************************************************")
+
+        
     
     def handle_turtle_pose(self,msg,turtlename):
         self.pose=msg
@@ -90,7 +114,7 @@ class tfBroadcaster:
         t.transform.translation.x=msg.x
         t.transform.translation.y=msg.y
         t.transform.translation.z=0.0
-        # rospy.loginfo(msg)
+    
         q= tf_conversions.transformations.quaternion_from_euler(0,0,msg.theta)
         t.transform.rotation.x=q[0]
         t.transform.rotation.y=q[1]

@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+from itertools import count
 import rospy
 from geometry_msgs.msg import Twist
 from scu_tutorials.srv import *
@@ -11,8 +12,14 @@ class PidControl():
     def __init__(self):
         self.pose=Pose()
         rospy.Subscriber('/leader/pose',Pose,self.pose_callback)
-        print("Pid control*************Pid control")
+        print("Pid control****************************Pid control")
         self.pid_server()
+
+    def pid_server(self):
+        rospy.init_node("pid_server")
+        s=rospy.Service('service_pid',ServicePID,self.handle_pid_server)
+        print("Ready to pid control")
+        rospy.spin()
         
 
     def pose_callback(self,msg):
@@ -20,10 +27,10 @@ class PidControl():
 
 
     def handle_pid_server(self,req):
-        self.teleport()
-        print("------------------------------------------------------return to origianl point----------------------------------------------------------------:")
-        pub=rospy.Publisher("leader/cmd_vel",Twist,queue_size=10)
-    
+       
+        velocity_publisher=rospy.Publisher("leader/cmd_vel",Twist,queue_size=10)
+        setpen=rospy.ServiceProxy('leader/set_pen',SetPen)
+        setpen(255,255,255,2,0)
         goal_pose=Pose()
         goal_pose.x=req.goal_x
         goal_pose.y=req.goal_y
@@ -31,7 +38,16 @@ class PidControl():
 
 
         vel_msg = Twist()
+
+        rate= rospy.Rate(10)
+        count_step=0
         while self.euclidean_distance(goal_pose)>=distance_tolerance:
+            if count_step>=20:
+               rospy.wait_for_service('leader/teleport_absolute')
+               teleport=rospy.ServiceProxy('leader/teleport_absolute',TeleportAbsolute)
+               teleport(req.goal_x,req.goal_y,0)
+               break
+            count_step+=1
        # Linear velocity in the x-axis.
             vel_msg.linear.x = self.linear_vel(goal_pose)
             vel_msg.linear.y = 0
@@ -43,26 +59,18 @@ class PidControl():
             vel_msg.angular.z = self.angular_vel(goal_pose)
 
             # Publishing our vel_msg
-            self.velocity_publisher.publish(vel_msg)
+            velocity_publisher.publish(vel_msg)
+           
 
             # Publish at the desired rate.
-            self.rate.sleep()
+            rate.sleep()
 
-    def teleport(self):
-        print("***********************************88888888888888888 teleport***************************")
-        for i in range(2,5):
-            rospy.wait_for_service('turtlesim/teleport_absolute')
-            teleport=rospy.ServiceProxy('turtle%s/teleport_absolute'%i,TeleportAbsolute)
-            teleport(0,0,0)
+        while True:
+            vel_msg.linear.x =0
+            vel_msg.angular.z=0
+            velocity_publisher.publish(vel_msg)
+    
         
-      
-
-
-    def pid_server(self):
-        rospy.init_node("pid_server")
-        s=rospy.Service('service_pid',ServicePID,self.handle_pid_server)
-        print("Ready to pid control")
-        rospy.spin()
 
     def update_pose(self, data):
         """Callback function which is called when a new message of type Pose is
