@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <arg name="world" default="wk2Homework" />
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find wk2homework_2020141440041)/worlds/$(arg world).world"/>
+  
+    <arg name="use_sim_time" value="true"/>
+    <arg name="debug" default="false"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="paused" default="false"/>
+  </include>
+  
+  <arg name="x" default="0"/>
+  <arg name="y" default="-10"/>
+  <arg name="z" default="0"/>
+  <arg name="roll" default="0"/>
+  <arg name="pitch" default="0"/>
+  <arg name="yaw" default="1.58"/>
+  <!--use a small script called spawn_model to make a service call request to the gazebo_ros ROS node-->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen"
+     args="-file $(find wk2homework_2020141440041)/urdf/2020141440041Bot.urdf -urdf -model Bot2020141440041 -x $(arg x) -y $(arg y) -z $(arg z) -Y $(arg yaw)" />
+  
+  <arg name="des_x" default="7"/>
+  <arg name="des_y" default="-2"/>
+  <param name="des_pos_x" value="$(arg des_x)"/>
+  <param name="des_pos_y" value="$(arg des_y)"/>
+  <param name="th_yaw" value="5"/>
+  <param name="th_dist" value="0.3"/> 
+  <node pkg="wk2homework_2020141440041" type="Bug0.py" name="bug0" output="screen"/>
+  <node pkg="wk2homework_2020141440041" type="GoToPoint.py" name="go_to_point" output="screen"/>
+  <node pkg="wk2homework_2020141440041" type="FollowWall.py" name="follow_wall" output="screen"/>
+  
+
+</launch>
+
+
