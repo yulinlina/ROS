@@ -1,5 +1,5 @@
 # ROS
-the code about tos runnin on linux  
+the code about tos running on linux  
 all the notes are available at https://www.yuque.com/yulinlin-rf5a0/qfbvb9
 ## Introdution
 1. use launch file to aumatically run turtlesim
