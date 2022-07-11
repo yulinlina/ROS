@@ -3,7 +3,8 @@ the code about tos running on linux
 all the notes are available at https://www.yuque.com/yulinlin-rf5a0/qfbvb9
 ## Introdution
 ROS (Robot Operating System) is rapidly becoming a de facto standard in robot programming. Using the turtlesim simulator, this course will provide a hands-on introduction to programming robots with ROS with an emphasis on middleware concepts and ROS architecture.     
-It also will introduce students to programming autonomous mobile robots using ROS with a special emphasis on designing a robotic system that can locate and navigate independently in an unknown environment. A 3D dynamic simulator, i.e. Gazebo, will be used throughout this course. The assessment is based on the development and implementation of path planning algorithms which allows a robot to autonomously navigate in an unknown environment. 
+It also will introduce students to programming autonomous mobile robots using ROS with a special emphasis on designing a robotic system that can locate and navigate independently in an unknown environment. A 3D dynamic simulator, i.e. Gazebo, will be used throughout this course. The assessment is based on the development and implementation of path planning algorithms which allows a robot to autonomously navigate in an unknown environment.  
+
 ***The topics to be covered include:***
 1. basic ROS concepts  
 2. controlling a robot with ROS  
