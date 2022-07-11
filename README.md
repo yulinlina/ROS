@@ -34,18 +34,18 @@ ROS (Robot Operating System) is rapidly becoming a de facto standard in robot pr
 * b.ROS namespaces 
 * c.ROS tf system and tf command tools Writing a tf broadcaster/listener in Python
 ## Contents in RosⅡ
-1.Gazebo robotics simulator with ROS 
+1. Gazebo robotics simulator with ROS 
 * a.Gazebo architecture and user interface 
 * b.Turtlebot simulator in Gazebo c.3D visualization tool for ROS (RViz)   
-2.Simulating Robot models in ROS 
+2. Simulating Robot models in ROS 
 * a.Unified Robot Description Format (URDF)
 * b.Visualizing the URDF model in RViz 
 * c.Spawning URDF robots in Gazebo d.Using xacro to clean up a URDF file   
-3.Obstacle avoidance and path planning 
+3. Obstacle avoidance and path planning 
 * a.Introduction to obstacle detection in ROS using a laser scanner 
 * b.Reading laser sensor data 
 * c.Obstacle avoidance using laser readings 
 * d.Bug algorithms: Bug 0, Bug 1 and Bug 2   
-4.Mapping and navigation in ROS 
+4. Mapping and navigation in ROS 
 * a.An introduction to ROS navigation Stack 
 * b.Building a map using SLAM c.Localization and navigation Using RViz with navigation stack
