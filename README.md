@@ -15,7 +15,7 @@ It also will introduce students to programming autonomous mobile robots using RO
 7. making an autonomous robot in ROS  
 8. path planning
 9. obstacle detection and mapping  
-10. ROS programming with Python.
+10. SLAM and Calo
 
 ## Contents in RosⅠ
 1. Introduction to ROS 
