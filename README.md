@@ -2,7 +2,13 @@
 the code about tos running on linux  
 all the notes are available at https://www.yuque.com/yulinlin-rf5a0/qfbvb9
 ## Introdution
-ROS (Robot Operating System) is rapidly becoming a de facto standard in robot programming. Using the turtlesim simulator, this course will provide a hands-on introduction to programming robots with ROS with an emphasis on middleware concepts and ROS architecture. The topics to be covered include：basic ROS concepts, controlling a robot with ROS, communication and coordination between multiple robots, ROS programming with Python. The assessment is based on a Python implementation of leader-follower formation control of multi robots.
+ROS (Robot Operating System) is rapidly becoming a de facto standard in robot programming. Using the turtlesim simulator, this course will provide a hands-on introduction to programming robots with ROS with an emphasis on middleware concepts and ROS architecture. 
+The topics to be covered include：
+basic ROS concepts  
+controlling a robot with ROS  
+communication and coordination between multiple robots  
+ROS programming with Python. 
+The assessment is based on a Python implementation of leader-follower formation control of multi robots.
 ## Contents
 1. Introduction to ROS 
 * a.An overview of ROS 
