@@ -1,4 +1,7 @@
-# Introduction
+# 运行
+在终端中输入命令  
+`roslaunch leader_and_follower leader_and_follower.launch` 
+# 演示
 1. 运行`$ rosmsg show HitBoundary` ，显示已定义的 HitBoundary.msg 中的内容, 我们新增了 x 和 y,用于实现 additional features 中的功能。
 ![image](https://user-images.githubusercontent.com/77262518/178401851-9f0721cc-69f6-4341-9995-456c712fa7d0.png)  
 
